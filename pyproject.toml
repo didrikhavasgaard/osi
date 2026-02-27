@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "osi-diagnose"
+version = "0.1.0"
+description = "OSI-model based network diagnostics CLI for macOS with optional OpenAI-enhanced reporting"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "OSI Diagnose" }]
+dependencies = [
+  "rich>=13.7",
+]
+
+[project.optional-dependencies]
+openai = ["openai>=1.51"]
+mac-wifi = [
+  "pyobjc-core>=10.3; platform_system=='Darwin'",
+  "pyobjc-framework-CoreWLAN>=10.3; platform_system=='Darwin'",
+]
+dev = ["pytest>=8.0"]
+
+[project.scripts]
+osi-diagnose = "osi_diagnose.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["osi_diagnose*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
